@@ -1,0 +1,23 @@
+{
+  "name": "simple-ui-builder",
+  "version": "1.0.0",
+  "description": "Build user interface as Lego bricks. UI.input(), UI.button(cb), UI.table(arr) etc. For lazy developers as I am. ",
+  "main": "ui.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artbels/simple-ui-builder.git"
+  },
+  "keywords": [
+    "ui",
+    "builder"
+  ],
+  "author": "artbels",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artbels/simple-ui-builder/issues"
+  },
+  "homepage": "https://github.com/artbels/simple-ui-builder#readme"
+}
