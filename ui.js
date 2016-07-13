@@ -255,6 +255,12 @@
 
   UI.download = function(str, params) {
 
+    params = params || {};
+
+    if(!str) console.warn("nothing to save!");
+
+    if(typeof str == "object") str = JSON.stringify(str);
+
     params.id = params.id || params.name || "download-link";
     params.name = params.name || "renameMe.json";
     params.type = params.type || "application/json";
