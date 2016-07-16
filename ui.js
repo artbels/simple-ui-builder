@@ -122,9 +122,15 @@
 
     params = params || {};
 
-    if (typeof params == "string") params = {
-      parent: params
-    };
+    if (typeof params == "string") {
+      params = {
+        parent: document.querySelector(params)
+      };
+    } else if (params instanceof HTMLElement) {
+      params = {
+        parent: params
+      };
+    }
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
     else params.parent = params.parent || document.body;
@@ -157,7 +163,7 @@
     }
 
     if (typeof params == "string") params = {
-      parent: params
+      parent: document.querySelector(params)
     };
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
