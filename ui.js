@@ -118,6 +118,28 @@
   };
 
 
+  UI.br = function(params) {
+
+    params = params || {};
+
+    if (typeof params == "string") params = {
+      parent: params
+    };
+
+    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
+    else params.parent = params.parent || document.body;
+
+    params.id = params.id || "br";
+
+    var exNode = document.getElementById(params.id);
+    if (exNode) params.parent.removeChild(exNode);
+
+    var br = document.createElement("br");
+    br.id = params.id;
+    params.parent.appendChild(br);
+  };
+  
+
   UI.radio = function(arr, params, cb) {
 
     if(!arr) return console.warn("no array to build radios!");
@@ -259,7 +281,7 @@
 
     if(!str) console.warn("nothing to save!");
 
-    if(typeof str == "object") str = JSON.stringify(str);
+    if(typeof str == "object") str = JSON.stringify(str, null, "\t");
 
     params.id = params.id || params.name || "download-link";
     params.name = params.name || "renameMe.json";
