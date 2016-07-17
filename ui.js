@@ -137,9 +137,6 @@
 
     params.id = params.id || "br";
 
-    var exNode = document.getElementById(params.id);
-    if (exNode) params.parent.removeChild(exNode);
-
     var br = document.createElement("br");
     br.id = params.id;
     params.parent.appendChild(br);
@@ -226,7 +223,7 @@
     checkbox.id = params.id;
     checkbox.checked = Boolean(params.checked);
     checkbox.onclick = function() {
-        cb(checkbox.id);
+        cb(checkbox.checked);
     };
     params.parent.appendChild(checkbox);
 
