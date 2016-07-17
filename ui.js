@@ -113,7 +113,9 @@
       }
     }
     button.style.margin = button.style.margin || params.margin || "10px";
-    button.onclick = cb;
+    button.onclick = function () {
+      cb(button.id);
+    };
     params.parent.appendChild(button);
   };
 
