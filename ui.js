@@ -56,7 +56,10 @@
     input.style.width = input.style.width || "300px";
     input.style.marginTop = input.style.marginTop || "5px";
     input.style.marginBottom = input.style.marginBottom || "5px";
-    input.value = params.value || localStorage["input#" + params.id] || "";
+    
+    if(params.value === undefined) {
+      input.value = localStorage["input#" + params.id] || "";
+    } else input.value = params.value;
 
     input.onkeyup = saveContents;
     input.onchange = saveContents;
