@@ -450,7 +450,7 @@
     select.id = params.id + "Select";
 
     var firstOption = document.createElement("option");
-    firstOption.innerHTML = "select " + params.id;
+    firstOption.innerHTML = params.firstRowText || "select " + params.id;
     select.appendChild(firstOption);
 
     for (var i = 0; i < arr.length; i++) {
