@@ -449,6 +449,13 @@
     select.className = "selectpicker";
     select.id = params.id + "Select";
 
+    if (params.style) {
+      for (var key in params.style) {
+        var val = params.style[key];
+        select.style[key] = val;
+      }
+    }
+
     var firstOption = document.createElement("option");
     firstOption.innerHTML = params.firstRowText || "select " + params.id;
     select.appendChild(firstOption);
