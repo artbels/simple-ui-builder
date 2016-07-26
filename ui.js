@@ -37,7 +37,7 @@
 
     var input = document.createElement("input");
     input.id = params.id;
-    input.type = "text";
+    input.type = params.type || "text";
 
     if (params.placeholder) input.placeholder = params.placeholder;
     input.name = params.name || params.id;
