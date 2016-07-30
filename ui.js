@@ -423,8 +423,6 @@
 
     if (!arr) return console.warn("no array to build select!");
 
-    params = params || {};
-
     if ((typeof params == "function") && (typeof cb == "object")) {
       var temp = params;
       params = cb;
@@ -435,6 +433,8 @@
       params = cb;
       cb = console.log;
     }
+
+    params = params || {};
 
     params.id = params.id || "";
 
