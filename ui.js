@@ -427,10 +427,15 @@
 
     params = params || {};
 
-    if (((typeof params == "function") || !params) && (typeof cb == "object")) {
+    if ((typeof params == "function") && (typeof cb == "object")) {
       var temp = params;
       params = cb;
       cb = temp;
+    }
+
+    if (!params && (typeof cb == "object")) {
+      params = cb;
+      cb = undefined;
     }
 
     params.id = params.id || "";
