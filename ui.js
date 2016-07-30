@@ -427,7 +427,7 @@
 
     params = params || {};
 
-    if ((typeof params == "function") && (typeof cb == "object")) {
+    if (((typeof params == "function") || !params) && (typeof cb == "object")) {
       var temp = params;
       params = cb;
       cb = temp;
