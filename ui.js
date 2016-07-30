@@ -246,9 +246,7 @@
       cb = temp;
     }
 
-    cb = cb || params.cb || function(d) {
-      console.log(d);
-    };
+    cb = cb || params.cb || console.log;
 
     params.id = params.id || "file-reader";
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
@@ -435,7 +433,7 @@
 
     if (!params && (typeof cb == "object")) {
       params = cb;
-      cb = undefined;
+      cb = console.log;
     }
 
     params.id = params.id || "";
@@ -446,9 +444,7 @@
     var exNode = document.getElementById(params.id + "Select");
     if (exNode) params.parent.removeChild(exNode);
 
-    cb = cb || function(selectedOption) {
-      console.log(selectedOption);
-    };
+    cb = cb || console.log;
 
     var select = document.createElement("select");
     select.className = "selectpicker";
@@ -500,9 +496,7 @@
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
     else params.parent = params.parent || document.body;
 
-    cb = cb || function(d) {
-      console.log(d);
-    };
+    cb = cb || console.log;
 
     var textarea = document.createElement("textarea");
     textarea.cols = params.cols;
