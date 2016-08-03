@@ -468,6 +468,11 @@
       option.id = params.id + "Option";
       option.innerHTML = params.innerHTML || item;
       option.value = params.value || item;
+
+      if(params.default && params.default == item) {
+        option.selected = true;
+      }
+
       select.appendChild(option);
     }
     params.parent.appendChild(select);
