@@ -30,7 +30,7 @@
     params.id = params.id || "input";
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -100,7 +100,7 @@
     params.innerHTML = params.innerHTML || params.title || "Action";
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -138,7 +138,7 @@
     }
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     params.id = params.id || "br";
 
@@ -169,7 +169,7 @@
     };
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     params.id = params.id || "radio";
 
@@ -219,7 +219,7 @@
     };
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     params.id = params.id || "checkbox";
 
@@ -250,7 +250,7 @@
 
     params.id = params.id || "file-reader";
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -294,7 +294,7 @@
     params.type = params.type || "application/json";
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -336,7 +336,7 @@
     params.id = params.id || "span";
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -366,7 +366,7 @@
     params.id = params.id || "img";
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -399,7 +399,7 @@
     params.innerHTML = params.innerHTML || params.href;
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -439,7 +439,7 @@
     params.id = params.id || "";
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id + "Select");
     if (exNode) params.parent.removeChild(exNode);
@@ -499,7 +499,7 @@
     params.fontSize = params.fontSize || "12px";
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     cb = cb || console.log;
 
@@ -565,7 +565,7 @@
     params.hideColumns = params.hideColumns || [];
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || params.parentNode || document.body;
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
     if (typeof params.hideHead != "boolean") params.hideHead = false;
     if (typeof params.sortColumns != "boolean") params.sortColumns = false;
