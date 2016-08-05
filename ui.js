@@ -86,6 +86,11 @@
       cb = temp;
     }
 
+    if ((typeof cb == "object") && (typeof params == "undefined")) {
+      params = cb;
+      cb = console.log;
+    }
+
     cb = cb || function() {
       console.log("button clicked");
     };
