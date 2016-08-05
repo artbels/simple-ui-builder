@@ -147,6 +147,9 @@
 
     params.id = params.id || "br";
 
+    var exNode = document.getElementById(params.id);
+    if (exNode) params.parent.removeChild(exNode);
+
     var br = document.createElement("br");
     br.id = params.id;
     params.parent.appendChild(br);
