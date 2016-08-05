@@ -78,18 +78,18 @@
 
   UI.button = function(cb, params) {
 
+    if (typeof cb == "object") {
+      if (typeof params == "function") {
+        var temp = params;
+        params = cb;
+        cb = temp;
+      } else if (typeof params == "undefined") {
+        params = cb;
+        cb = console.log;
+      }
+    }
+
     params = params || {};
-
-    if ((typeof params == "function") && (typeof cb == "object")) {
-      var temp = params;
-      params = cb;
-      cb = temp;
-    }
-
-    if ((typeof cb == "object") && (typeof params == "undefined")) {
-      params = cb;
-      cb = console.log;
-    }
 
     cb = cb || function() {
       console.log("button clicked");
