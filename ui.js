@@ -484,13 +484,7 @@
   };
 
 
-  UI.TB = function(cb, params) {
-
-    if ((typeof params == "function") && (typeof cb == "object")) {
-      var temp = params;
-      params = cb;
-      cb = temp;
-    }
+  UI.textarea = function(params) {
 
     params = params || {};
     params.id = params.id || "textarea";
@@ -500,8 +494,6 @@
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
     else params.parent = params.parent || document.querySelector("#ui") || document.body;
-
-    cb = cb || console.log;
 
     var textarea = document.createElement("textarea");
     textarea.cols = params.cols;
@@ -516,34 +508,62 @@
     textarea.onkeyup = saveContents;
     textarea.onchange = saveContents;
 
-    function saveContents() {
-      localStorage[params.id] = textarea.value.trim();
+    function saveContents(e) {
+      localStorage["textarea#" + params.id] = textarea.value.trim();
     }
+  };
+
+
+  UI.TB = function(cb, params) {
+
+    if ((typeof params == "function") && (typeof cb == "object")) {
+      var temp = params;
+      params = cb;
+      cb = temp;
+    }
+
+    cb = cb || console.log;
+
+    params = params || {};
+
+    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
+    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+
+    UI.textarea(params);
 
     params.parent.appendChild(document.createElement("br"));
 
-    var actionButton = document.createElement("button");
-    actionButton.id = params.id + "Action";
-    actionButton.innerHTML = params.buttonText || "Action";
+    var textareaId = params.id;
+    var textareaNode = document.querySelector("textarea#" + params.id);
+
     if (!params.noAction) {
-      params.parent.appendChild(actionButton);
-    }
-    actionButton.onclick = function() {
-      var textareaArr = textarea.value.trim().split(/\n\r?/).filter(function(a) {
-        return a;
+
+      var actionParams = params;
+      actionParams.id = params.id + "Action";
+      actionParams.innerHTML = params.buttonText || "Action";
+      actionParams.className = "";
+      actionParams.style = {margin: "0px"};
+
+      UI.button(actionParams, function() {
+        var textareaArr = textareaNode.value.trim().split(/\n\r?/).filter(function(a) {
+          return a;
+        });
+        cb(textareaArr);
       });
-      cb(textareaArr);
-    };
+    }
 
-    var clearButton = document.createElement("button");
-    clearButton.innerHTML = "Clear";
-    params.parent.appendChild(clearButton);
+    var clearParams = params;
+    clearParams.id = params.id + "Clear";
+    clearParams.innerHTML = "Clear";
+    clearParams.className = "";
+    clearParams.style = {margin: "0px", marginLeft: "5px"};
 
-    clearButton.onclick = function() {
-      textarea.value = "";
-      localStorage[params.id] = "";
-    };
+    UI.button(clearParams, function() {
+      textareaNode.value = "";
+      localStorage[textareaId] = "";
+    });
   };
+
 
   UI.table = function(arr, params) {
 
@@ -697,6 +717,5 @@
       };
     }
   };
-
 
 })();
