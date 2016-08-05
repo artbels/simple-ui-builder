@@ -500,6 +500,9 @@
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
     else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
+    var exNode = document.getElementById(params.id);
+    if (exNode) params.parent.removeChild(exNode);
+
     var textarea = document.createElement("textarea");
     textarea.cols = params.cols;
     textarea.rows = params.rows;
