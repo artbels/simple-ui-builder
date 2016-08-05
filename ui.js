@@ -507,6 +507,15 @@
     textarea.cols = params.cols;
     textarea.rows = params.rows;
     textarea.id = params.id;
+    textarea.className = params.className || params.class || "form-control";
+
+    if (params.style) {
+      for (var key in params.style) {
+        var val = params.style[key];
+        textarea.style[key] = val;
+      }
+    }
+
     textarea.style.fontFamily = "monospace";
     textarea.style.fontSize = params.fontSize;
     params.parent.appendChild(textarea);
@@ -537,6 +546,7 @@
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
     else params.parent = params.parent || document.querySelector("#ui") || document.body;
 
+    params.className = "";
     UI.textarea(params);
 
     params.parent.appendChild(document.createElement("br"));
