@@ -520,7 +520,7 @@
     textarea.style.fontSize = params.fontSize;
     params.parent.appendChild(textarea);
 
-    textarea.value = localStorage[params.id] || params.content || "";
+    textarea.value = localStorage["textarea#" + params.id] || params.value || "";
 
     textarea.onkeyup = saveContents;
     textarea.onchange = saveContents;
