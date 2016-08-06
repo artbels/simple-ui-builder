@@ -559,7 +559,8 @@
 
     if (!params.noAction) {
 
-      var actionParams = params;
+      var actionParams = {};
+      actionParams.parent = params.parent;
       actionParams.id = params.id + "Action";
       actionParams.innerHTML = params.buttonText || "Action";
       actionParams.className = "";
@@ -573,7 +574,8 @@
       });
     }
 
-    var clearParams = params;
+    var clearParams = {};
+    clearParams.parent = params.parent;
     clearParams.id = params.id + "Clear";
     clearParams.innerHTML = "Clear";
     clearParams.className = "";
