@@ -58,7 +58,7 @@
     input.style.marginBottom = input.style.marginBottom || "5px";
 
     if (params.value === undefined) {
-      input.value = localStorage["input#" + params.id] || "";
+      input.value = localStorage["input#" + params.id] || params.default || "";
     } else input.value = params.value;
 
     input.onkeyup = saveContents;
@@ -591,6 +591,10 @@
     if ((!arr) && (typeof(arr[0]) != "object")) {
       alert("Argument is not an array with objects");
     }
+
+    if(typeof arr[0] != "object") arr.map(function (a) {
+      return {value: a};
+    });
 
     var reDateTimeJS = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
 
