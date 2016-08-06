@@ -500,8 +500,8 @@
 
     params = params || {};
     params.id = params.id || "textarea";
-    params.cols = params.cols || "60";
-    params.rows = params.rows || "12";
+    params.cols = params.cols.toString() || "60";
+    params.rows = params.rows.toString() || "12";
     params.fontSize = params.fontSize || "12px";
 
     if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
