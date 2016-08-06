@@ -594,7 +594,7 @@
       alert("Argument is not an array with objects");
     }
 
-    if(typeof arr[0] != "object") arr.map(function (a) {
+    if(typeof arr[0] != "object") arr = arr.map(function (a) {
       return {value: a};
     });
 
