@@ -136,6 +136,10 @@
       params = {
         parent: document.querySelector(params)
       };
+    } else if (typeof params == "number") {
+      params = {
+        id: params.toString()
+      };
     } else if (params instanceof HTMLElement) {
       params = {
         parent: params
