@@ -91,12 +91,12 @@
 
     params = params || {};
 
-    cb = cb || function() {
-      console.log("button clicked");
+    cb = cb || function(id) {
+      console.log(id + " clicked");
     };
 
     if (typeof params == "string") params = {
-      title: params,
+      innerHTML: params,
       id: params
     };
 
@@ -125,6 +125,55 @@
       cb(button.id);
     };
     params.parent.appendChild(button);
+  };
+
+
+  UI.buttons = function(arr, cb, params) {
+
+    if (!arr || !arr.length) return console.warn("no array to build buttons!");
+
+    if (typeof cb == "object") {
+      if (typeof params == "function") {
+        var temp = params;
+        params = cb;
+        cb = temp;
+      } else if (typeof params == "undefined") {
+        params = cb;
+        cb = console.log;
+      }
+    }
+
+    params = params || {};
+
+    cb = cb || function(id) {
+      console.log(id + " clicked");
+    };
+
+    if (typeof params == "string") params = {
+      innerHTML: params,
+      id: params
+    };
+
+
+    var i = 0;
+    var l = arr.length;
+
+    (function next() {
+      var item = arr[i];
+
+      if (typeof item == "number") item = item.toString();
+      var buttonParams = {
+        parent: params.parent,
+        innerHTML: item,
+        id: item.toLowerCase().replace(/[^\w\d]/g, "-"),
+        style: {
+          margin: "2px"
+        }
+      };
+      UI.button(cb, buttonParams);
+      i++;
+      if (i < l) next();
+    })();
   };
 
 
@@ -162,7 +211,7 @@
 
   UI.radio = function(arr, params, cb) {
 
-    if (!arr) return console.warn("no array to build radios!");
+    if (!arr || !arr.length) return console.warn("no array to build radios!");
 
     params = params || {};
 
@@ -433,7 +482,7 @@
 
   UI.select = function(arr, cb, params) {
 
-    if (!arr) return console.warn("no array to build select!");
+    if (!arr || !arr.length) return console.warn("no array to build select!");
 
     if ((typeof params == "function") && (typeof cb == "object")) {
       var temp = params;
@@ -481,7 +530,7 @@
       option.innerHTML = params.innerHTML || item;
       option.value = params.value || item;
 
-      if(params.default && params.default == item) {
+      if (params.default && params.default == item) {
         option.selected = true;
       }
 
@@ -491,7 +540,7 @@
 
     select.onchange = function() {
       var selectedOptionNode = document.querySelector("option#" + params.id + "Option" + ":checked");
-      if(selectedOptionNode) cb(selectedOptionNode.value);
+      if (selectedOptionNode) cb(selectedOptionNode.value);
     };
   };
 
@@ -568,7 +617,9 @@
       actionParams.id = params.id + "Action";
       actionParams.innerHTML = params.buttonText || "Action";
       actionParams.className = "";
-      actionParams.style = {margin: "0px"};
+      actionParams.style = {
+        margin: "0px"
+      };
 
       UI.button(actionParams, function() {
         var textareaArr = textareaNode.value.trim().split(/\n\r?/).filter(function(a) {
@@ -583,7 +634,10 @@
     clearParams.id = params.id + "Clear";
     clearParams.innerHTML = "Clear";
     clearParams.className = "";
-    clearParams.style = {margin: "0px", marginLeft: "5px"};
+    clearParams.style = {
+      margin: "0px",
+      marginLeft: "5px"
+    };
 
     UI.button(clearParams, function() {
       textareaNode.value = "";
@@ -598,8 +652,10 @@
       alert("Argument is not an array with objects");
     }
 
-    if(typeof arr[0] != "object") arr = arr.map(function (a) {
-      return {value: a};
+    if (typeof arr[0] != "object") arr = arr.map(function(a) {
+      return {
+        value: a
+      };
     });
 
     var reDateTimeJS = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
