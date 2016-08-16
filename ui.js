@@ -29,8 +29,10 @@
 
     params.id = params.id || "input";
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -58,7 +60,8 @@
     input.style.marginBottom = input.style.marginBottom || "5px";
 
     if (params.value === undefined) {
-      input.value = localStorage["input#" + params.id] || params.default || "";
+      input.value = localStorage["input#" + params.id] ||
+        params.default || "";
     } else input.value = params.value;
 
     input.onkeyup = saveContents;
@@ -101,11 +104,18 @@
     };
 
     params.id = params.id || "button";
-    params.className = (params.class !== undefined) ? params.class : ((params.className !== undefined) ? params.className : "btn btn-default");
+    params.className = (params.class !== undefined) ?
+      params.class :
+      ((params.className !== undefined) ?
+        params.className :
+        "btn btn-default");
+
     params.innerHTML = params.innerHTML || params.title || "Action";
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -130,7 +140,8 @@
 
   UI.buttons = function(arr, cb, params) {
 
-    if (!arr || !arr.length) return console.warn("no array to build buttons!");
+    if (!arr || !arr.length)
+      return console.warn("no array to build buttons!");
 
     if (typeof cb == "object") {
       if (typeof params == "function") {
@@ -195,8 +206,10 @@
       };
     }
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string")
+      params.parent = document.querySelector(params.parent);
+    else params.parent = params.parent || document.querySelector("#ui") ||
+      document.body;
 
     params.id = params.id || "br";
 
@@ -211,7 +224,8 @@
 
   UI.radio = function(arr, params, cb) {
 
-    if (!arr || !arr.length) return console.warn("no array to build radios!");
+    if (!arr || !arr.length)
+      return console.warn("no array to build radios!");
 
     params = params || {};
 
@@ -229,8 +243,10 @@
       parent: document.querySelector(params)
     };
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     params.id = params.id || "radio";
 
@@ -279,8 +295,10 @@
       id: params
     };
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     params.id = params.id || "checkbox";
 
@@ -293,7 +311,8 @@
     };
     params.parent.appendChild(checkbox);
 
-    if (params.text) params.parent.appendChild(document.createTextNode(params.text));
+    if (params.text)
+      params.parent.appendChild(document.createTextNode(params.text));
   };
 
 
@@ -310,8 +329,10 @@
     cb = cb || params.cb || console.log;
 
     params.id = params.id || "file-reader";
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -320,21 +341,30 @@
     params.parent.appendChild(fileInput);
     fileInput.type = "file";
     fileInput.id = params.id;
+
     fileInput.onchange = function(evt) {
       var fileToRead = evt.target.files[0];
       var fileType = fileToRead.name.split(/\./).pop();
+
       if (parent.bypassFileReader) return cb(fileToRead);
       var fileReader = new FileReader();
       fileReader.onload = function(e) {
+
         var contents = e.target.result;
-        if (params.json && (["{", "["].indexOf(contents.slice(0, 1)) != -1)) contents = JSON.parse(contents);
+        if (params.json && (["{", "["].indexOf(contents.slice(0, 1)) != -1))
+          contents = JSON.parse(contents);
+
         cb(contents, fileToRead);
       };
 
-      if ((["zip", "kmz"].indexOf(fileType) != -1) || (params.readAsArrayBuffer)) {
+      if ((["zip", "kmz"].indexOf(fileType) != -1) ||
+        (params.readAsArrayBuffer)) {
         fileReader.readAsArrayBuffer(fileToRead);
-      } else if ((["xls", "xlsx"].indexOf(fileType) != -1) || (params.readAsBinaryString)) {
+
+      } else if ((["xls", "xlsx"].indexOf(fileType) != -1) ||
+        (params.readAsBinaryString)) {
         fileReader.readAsBinaryString(fileToRead);
+
       } else {
         fileReader.readAsText(fileToRead, params.encoding);
       }
@@ -354,8 +384,10 @@
     params.name = params.name || "renameMe.json";
     params.type = params.type || "application/json";
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -396,8 +428,10 @@
 
     params.id = params.id || "span";
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -426,8 +460,10 @@
 
     params.id = params.id || "img";
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -459,8 +495,10 @@
     params.id = params.id || "link";
     params.innerHTML = params.innerHTML || params.href;
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -482,7 +520,8 @@
 
   UI.select = function(arr, cb, params) {
 
-    if (!arr || !arr.length) return console.warn("no array to build select!");
+    if (!arr || !arr.length)
+      return console.warn("no array to build select!");
 
     if ((typeof params == "function") && (typeof cb == "object")) {
       var temp = params;
@@ -499,8 +538,10 @@
 
     params.id = params.id || "";
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id + "Select");
     if (exNode) params.parent.removeChild(exNode);
@@ -539,7 +580,8 @@
     params.parent.appendChild(select);
 
     select.onchange = function() {
-      var selectedOptionNode = document.querySelector("option#" + params.id + "Option" + ":checked");
+      var selectedOptionNode =
+        document.querySelector("option#" + params.id + "Option" + ":checked");
       if (selectedOptionNode) cb(selectedOptionNode.value);
     };
   };
@@ -553,8 +595,10 @@
     params.rows = (params.rows || 12).toString();
     params.fontSize = params.fontSize || "12px";
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     var exNode = document.getElementById(params.id);
     if (exNode) params.parent.removeChild(exNode);
@@ -576,7 +620,8 @@
     textarea.style.fontSize = params.fontSize;
     params.parent.appendChild(textarea);
 
-    textarea.value = localStorage["textarea#" + params.id] || params.value || "";
+    textarea.value = localStorage["textarea#" + params.id] ||
+      params.value || "";
 
     textarea.onkeyup = saveContents;
     textarea.onchange = saveContents;
@@ -599,8 +644,10 @@
 
     params = params || {};
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     params.className = "";
     UI.textarea(params);
@@ -622,9 +669,11 @@
       };
 
       UI.button(actionParams, function() {
-        var textareaArr = textareaNode.value.trim().split(/\n\r?/).filter(function(a) {
-          return a;
-        });
+        var textareaArr = textareaNode.value
+          .trim()
+          .split(/\n\r?/).filter(function(a) {
+            return a;
+          });
         cb(textareaArr);
       });
     }
@@ -668,11 +717,15 @@
     if (typeof params.selectable != "boolean") params.selectable = false;
 
     params.tableId = params.tableId || params.id || "printedTable";
-    params.showColumns = params.showColumns || params.columns || params.cols || [];
+    params.showColumns = params.showColumns ||
+      params.columns || params.cols || [];
+
     params.hideColumns = params.hideColumns || [];
 
-    if (typeof params.parent == "string") params.parent = document.querySelector(params.parent);
-    else params.parent = params.parent || document.querySelector("#ui") || document.body;
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
 
     if (typeof params.hideHead != "boolean") params.hideHead = false;
     if (typeof params.sortColumns != "boolean") params.sortColumns = false;
@@ -687,9 +740,10 @@
       columns = params.showColumns;
     } else {
 
-      for (var i = 0; i < arr.length; i++) { //собираем все ключи со всех объектов, а не только с первого
+      for (var i = 0; i < arr.length; i++) { //собираем ключи со всех объектов
         for (var key in arr[i]) {
-          if ((columns.indexOf(key) == -1) && (params.hideColumns.indexOf(key) == -1)) {
+          if ((columns.indexOf(key) == -1) &&
+            (params.hideColumns.indexOf(key) == -1)) {
             columns.push(key);
 
             var colCell = arr[i][key];
@@ -774,15 +828,22 @@
 
           if (typeof cell == "string") {
             cell = cell.replace(params.quotes, "'");
-            if (reDateTimeJS.test(cell)) cell = new Date(cell).toLocaleDateString();
+            if (reDateTimeJS.test(cell)) cell =
+              new Date(cell).toLocaleDateString();
           }
 
           var td = document.createElement('td');
 
           if (/<a.+<\/a>/.test(cell)) {
-            td.appendChild(new DOMParser().parseFromString(cell, "text/html").querySelector("a"));
+            td.appendChild(new DOMParser()
+              .parseFromString(cell, "text/html")
+              .querySelector("a"));
+
           } else if (/<img.+?>/.test(cell)) {
-            td.appendChild(new DOMParser().parseFromString(cell, "text/html").querySelector("img"));
+            td.appendChild(new DOMParser()
+              .parseFromString(cell, "text/html")
+              .querySelector("img"));
+
           } else {
             td.appendChild(document.createTextNode(cell));
           }
@@ -797,12 +858,24 @@
 
     if (chBoxCol) {
       chBoxCol.onchange = function() {
-        var checkboxes = document.querySelectorAll("." + params.tableId + "RowCheckbox");
+        var checkboxes =
+          document.querySelectorAll("." + params.tableId + "RowCheckbox");
+
         for (var i = 0; i < checkboxes.length; i++) {
           checkboxes[i].checked = !checkboxes[i].checked;
         }
       };
     }
+  };
+
+
+  UI.getTableSel = function(tableId) {
+    var checkboxes = document.querySelectorAll("." + tableId + "RowCheckbox");
+    var checkedArr = [];
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].checked) checkedArr.push(i);
+    }
+    return checkedArr;
   };
 
 })();
