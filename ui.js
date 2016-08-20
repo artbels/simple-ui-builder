@@ -844,6 +844,11 @@
               .parseFromString(cell, "text/html")
               .querySelector("img"));
 
+          } else if (/<input.+?>/.test(cell)) {
+            td.appendChild(new DOMParser()
+              .parseFromString(cell, "text/html")
+              .querySelector("input"));
+
           } else {
             td.appendChild(document.createTextNode(cell));
           }
