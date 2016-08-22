@@ -760,11 +760,18 @@
 
     var table = document.createElement('table');
     table.id = params.tableId;
-    table.style.margin = "10px";
 
-    table.style.fontFamily = "monospace";
-    table.style.width = "auto 90%";
-    table.style.borderCollapse = "collapse";
+    if (params.style) {
+      for (var key in params.style) {
+        var val = params.style[key];
+        table.style[key] = val;
+      }
+    }
+
+    table.style.margin = params.style.margin || "10px";
+    table.style.fontFamily = table.style.fontFamily || "monospace";
+    table.style.width = params.style.width || "auto 90%";
+    table.style.borderCollapse = params.style.borderCollapse || "collapse";
 
     params.parent.appendChild(table);
 
