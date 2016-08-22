@@ -762,9 +762,9 @@
     table.id = params.tableId;
 
     if (params.style) {
-      for (var key in params.style) {
-        var val = params.style[key];
-        table.style[key] = val;
+      for (var style in params.style) {
+        var val = params.style[style];
+        table.style[style] = val;
       }
     }
 
