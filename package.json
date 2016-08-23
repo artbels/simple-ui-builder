@@ -1,6 +1,6 @@
 {
   "name": "simple-ui-builder",
-  "version": "1.0.37",
+  "version": "1.0.38",
   "description": "Build user interface like Lego bricks. UI.input(), UI.button(cb), UI.select(arr) etc. For lazy guys as I am.",
   "main": "ui.js",
   "repository": {
