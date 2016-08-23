@@ -775,10 +775,10 @@
       }
     }
 
-    table.style.margin = params.style.margin || "10px";
+    table.style.margin = table.style.margin || "10px";
     table.style.fontFamily = table.style.fontFamily || "monospace";
-    table.style.width = params.style.width || "auto 90%";
-    table.style.borderCollapse = params.style.borderCollapse || "collapse";
+    table.style.width = table.style.width || "auto 90%";
+    table.style.borderCollapse = table.style.borderCollapse || "collapse";
 
     params.parent.appendChild(table);
 
