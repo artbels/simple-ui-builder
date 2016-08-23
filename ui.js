@@ -897,4 +897,73 @@
     return checkedArr;
   };
 
+
+  UI.div = function(params) {
+    params = params || {};
+
+    if (typeof params.parent == "string") {
+      params.parent = document.querySelector(params.parent);
+    } else params.parent = params.parent ||
+      document.querySelector("#ui") || document.body;
+
+    var exNode = document.getElementById(params.id);
+    if (exNode) params.parent.removeChild(exNode);
+
+    var div = document.createElement("div");
+
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute];
+        table.setAttribute(style, val);
+      }
+    }
+
+    params.parent.appendChild(div);
+  };
+
+
+  UI.appendModal = function(params) {
+    //requires bootstrap
+
+    params = params || {};
+
+    var fadeDiv = document.createElement("div");
+    fadeDiv.id = params.id || "modal";
+    fadeDiv.setAttribute("class", "modal fade");
+    fadeDiv.setAttribute("role", "dialog");
+    document.body.appendChild(fadeDiv);
+
+    var dialogDiv = document.createElement("div");
+    dialogDiv.setAttribute("class", "modal-dialog");
+    fadeDiv.appendChild(dialogDiv);
+
+    var contentDiv = document.createElement("div");
+    contentDiv.setAttribute("class", "modal-content");
+    dialogDiv.appendChild(contentDiv);
+
+    var headerDiv = document.createElement("div");
+    headerDiv.setAttribute("class", "modal-header");
+    headerDiv.style.padding = "10px";
+    contentDiv.appendChild(headerDiv);
+
+    var closeButton = document.createElement("button");
+    closeButton.setAttribute("class", "close");
+    closeButton.setAttribute("data-dismiss", "modal");
+    closeButton.innerHTML = "&times;";
+    headerDiv.appendChild(closeButton);
+
+    var h4 = document.createElement("h4");
+    h4.setAttribute("class", "modal-title");
+    h4.innerHTML = params.title || "Modal title";
+    headerDiv.appendChild(h4);
+
+    var bodyDiv = document.createElement("div");
+    bodyDiv.id = "body";
+    contentDiv.appendChild(bodyDiv);
+
+    var footerDiv = document.createElement("div");
+    footerDiv.id = "footer";
+    contentDiv.appendChild(footerDiv);
+  };
+
 })();
