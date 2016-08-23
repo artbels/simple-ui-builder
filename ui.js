@@ -342,6 +342,13 @@
     fileInput.type = "file";
     fileInput.id = params.id;
 
+    if (params.style) {
+      for (var key in params.style) {
+        var val = params.style[key];
+        fileInput.style[key] = val;
+      }
+    }
+
     fileInput.onchange = function(evt) {
       var fileToRead = evt.target.files[0];
       var fileType = fileToRead.name.split(/\./).pop();
