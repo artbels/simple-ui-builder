@@ -561,7 +561,7 @@
     cb = cb || console.log;
 
     var select = document.createElement("select");
-    select.className = "selectpicker";
+    select.className = params.className || "selectpicker";
     select.id = params.id + "Select";
 
     if (params.style) {
