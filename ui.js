@@ -996,6 +996,7 @@
     var div = document.createElement("div");
 
     div.id = params.id || "div";
+    div.className = params.className;
 
     if (params.attributes) {
       for (var attribute in params.attributes) {
