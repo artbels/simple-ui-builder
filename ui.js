@@ -263,7 +263,7 @@
       radio.name = params.id;
 
       if(params.default && (params.default == item)) {
-        radio.chacked = true;
+        radio.checked = true;
       } 
 
       radio.onclick = function() {
