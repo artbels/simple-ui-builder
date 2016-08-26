@@ -262,9 +262,9 @@
       radio.id = item;
       radio.name = params.id;
 
-      if(params.default && (params.default == item)) {
+      if (params.default && (params.default == item)) {
         radio.checked = true;
-      } 
+      }
 
       radio.onclick = function() {
         cb(radio.id);
@@ -893,6 +893,79 @@
   };
 
 
+  UI.addRow = function(obj, params) {
+    params = params || {};
+    params.selectable = params.selectable || false;
+    params.mdl = params.mdl || false;
+    params.showColumns = params.showColumns || params.cols || params.columns || [];
+    params.tableId = params.tableId || params.id || "printedTable";
+
+    var tableExists = document.getElementById(params.tableId);
+    if (!tableExists) Table.print([], params);
+
+    var reDateTimeJS = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}.\d{3}Z/;
+
+    var columns = [];
+    var cell = "";
+
+    if (params.showColumns.length !== 0) {
+      columns = params.showColumns;
+    } else {
+      columns = Object.keys(obj);
+    }
+    var tbody = document.querySelector("#" + params.tableId).querySelector("tbody");
+    var dRow = tbody.insertRow(-1);
+
+    if (params.selectable) {
+      var tds = document.createElement('td');
+      if (!params.mdl) {
+        tds.style.padding = "3px";
+        tds.style.border = "1px solid black";
+      }
+      var chBoxRow = document.createElement("input");
+      chBoxRow.className = params.tableId + "RowCheckbox";
+      chBoxRow.type = "checkbox";
+      chBoxRow.checked = Boolean(params.checked);
+      tds.appendChild(chBoxRow);
+      dRow.appendChild(tds);
+    }
+
+    for (var i = 0; i < columns.length; i++) {
+
+      var td = document.createElement('td');
+      if (!params.mdl) {
+        td.style.padding = "3px";
+        td.style.border = "1px solid black";
+      }
+      cell = obj[columns[i]];
+      cell = (((cell !== undefined) && (cell !== null)) ? cell : "");
+      if (cell.constructor === Array) cell = cell.join(", ");
+      else if (cell.constructor === Object) cell = JSON.stringify(cell);
+      else if (typeof cell == "string") {
+        cell = cell.replace(params.quotes, "'");
+        if (reDateTimeJS.test(cell)) cell = new Date(cell).toLocaleDateString();
+      }
+
+      if (/<a.+<\/a>/.test(cell)) {
+        td.appendChild(new DOMParser().parseFromString(cell, "text/html").querySelector("a"));
+      } else if (/<img.+?>/.test(cell)) {
+        td.appendChild(new DOMParser().parseFromString(cell, "text/html").querySelector("img"));
+      } else {
+        td.appendChild(document.createTextNode(cell));
+      }
+      if (!params.mdl) {
+        td.style.padding = "3px";
+        td.style.border = "1px solid black";
+      } else {
+        if (!numCol[columns[l]]) { //select first col with non-num
+          td.className = "mdl-data-table__cell--non-numeric";
+        }
+      }
+      dRow.appendChild(td);
+    }
+  };
+
+
   UI.getTableSel = function(tableId) {
     var checkboxes = document.querySelectorAll("." + tableId + "RowCheckbox");
     var checkedArr = [];
@@ -906,6 +979,12 @@
   UI.div = function(params) {
     params = params || {};
 
+    if (typeof params == "string") {
+      params = {
+        id: params
+      };
+    }
+
     if (typeof params.parent == "string") {
       params.parent = document.querySelector(params.parent);
     } else params.parent = params.parent ||
@@ -915,6 +994,8 @@
     if (exNode) params.parent.removeChild(exNode);
 
     var div = document.createElement("div");
+
+    div.id = params.id || "div";
 
     if (params.attributes) {
       for (var attribute in params.attributes) {
