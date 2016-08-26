@@ -261,6 +261,11 @@
       radio.type = "radio";
       radio.id = item;
       radio.name = params.id;
+
+      if(params.default && (params.default == item)) {
+        radio.chacked = true;
+      } 
+
       radio.onclick = function() {
         cb(radio.id);
       };
