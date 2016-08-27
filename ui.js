@@ -318,12 +318,21 @@
     checkbox.id = params.id;
     checkbox.checked = Boolean(params.checked);
     checkbox.onclick = function() {
-      cb(checkbox.id + ' '+ checkbox.checked);
+      cb(checkbox.id + ' ' + checkbox.checked);
     };
     params.parent.appendChild(checkbox);
 
-    if (params.text)
-      params.parent.appendChild(document.createTextNode(params.text));
+    if (params.text) {
+      var spanParams = {
+        parent: params.parent,
+        id: params.id + "-span",
+        innerHTML: params.text
+      };
+
+      var exSpanNode = document.getElementById(spanParams.id);
+      if (exSpanNode) params.parent.removeChild(exSpanNode);
+      UI.span(spanParams);
+    }
   };
 
 
