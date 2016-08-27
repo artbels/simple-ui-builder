@@ -250,6 +250,9 @@
 
     params.id = params.id || "radio";
 
+    var exNode = document.getElementById(params.id);
+    if (exNode) params.parent.removeChild(exNode);
+
     var i = 0;
     var l = arr.length;
 
@@ -306,6 +309,9 @@
       document.querySelector("#ui") || document.body;
 
     params.id = params.id || "checkbox";
+
+    var exNode = document.getElementById(params.id);
+    if (exNode) params.parent.removeChild(exNode);
 
     var checkbox = document.createElement("input");
     checkbox.type = "checkbox";
