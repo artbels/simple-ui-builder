@@ -312,12 +312,55 @@
     checkbox.id = params.id;
     checkbox.checked = Boolean(params.checked);
     checkbox.onclick = function() {
-      cb(checkbox.checked);
+      cb(checkbox.id + ' '+ checkbox.checked);
     };
     params.parent.appendChild(checkbox);
 
     if (params.text)
       params.parent.appendChild(document.createTextNode(params.text));
+  };
+
+
+  UI.checkboxes = function(arr, cb, params) {
+    if (!arr || !arr.length)
+      return console.warn("no array to build buttons!");
+
+    if (typeof cb == "object") {
+      if (typeof params == "function") {
+        var temp = params;
+        params = cb;
+        cb = temp;
+      } else if (typeof params == "undefined") {
+        params = cb;
+        cb = console.log;
+      }
+    }
+
+    params = params || {};
+
+    cb = cb || function(id) {
+      console.log(id + " checked");
+    };
+
+    var i = 0;
+    var l = arr.length;
+
+    (function next() {
+      var item = arr[i];
+
+      if (typeof item == "number") item = item.toString();
+      var checkboxParams = {
+        parent: params.parent,
+        text: item,
+        id: item.toLowerCase().replace(/[^\w\d]/g, "-"),
+        style: {
+          margin: "2px"
+        }
+      };
+      UI.checkbox(cb, checkboxParams);
+      i++;
+      if (i < l) next();
+    })();
   };
 
 
