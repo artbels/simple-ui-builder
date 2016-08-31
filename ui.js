@@ -1071,9 +1071,11 @@
     //requires bootstrap
 
     params = params || {};
+    params.id = params.id || "modal";
+    params.title = params.title || "Modal title";
 
     var fadeDiv = document.createElement("div");
-    fadeDiv.id = params.id || "modal";
+    fadeDiv.id = params.id;
     fadeDiv.setAttribute("class", "modal fade");
     fadeDiv.setAttribute("role", "dialog");
     document.body.appendChild(fadeDiv);
@@ -1099,15 +1101,15 @@
 
     var h4 = document.createElement("h4");
     h4.setAttribute("class", "modal-title");
-    h4.innerHTML = params.title || "Modal title";
+    h4.innerHTML = params.title;
     headerDiv.appendChild(h4);
 
     var bodyDiv = document.createElement("div");
-    bodyDiv.id = "body";
+    bodyDiv.id = params.id + "-body";
     contentDiv.appendChild(bodyDiv);
 
     var footerDiv = document.createElement("div");
-    footerDiv.id = "footer";
+    footerDiv.id = params.id + "-footer";
     contentDiv.appendChild(footerDiv);
   };
 
