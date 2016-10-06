@@ -367,6 +367,7 @@
       if (typeof item == 'number') item = item.toString()
       var checkboxParams = {
         parent: params.parent,
+        checked: Boolean(params.checked),
         text: item,
         id: UI.slug(item),
         style: {
