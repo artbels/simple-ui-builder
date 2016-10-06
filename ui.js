@@ -363,7 +363,7 @@
       var checkboxParams = {
         parent: params.parent,
         text: item,
-        id: item.toLowerCase().replace(/[^\w\d]/g, '-'),
+        id: UI.slug(item),
         style: {
           margin: '2px'
         }
