@@ -1033,7 +1033,7 @@
     if (params.attributes) {
       for (var attribute in params.attributes) {
         var val = params.attributes[attribute]
-        div.setAttribute(style, val)
+        div.setAttribute(attribute, val)
       }
     }
 
