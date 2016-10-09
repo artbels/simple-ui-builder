@@ -568,6 +568,7 @@
     var a = document.createElement('a')
     a.id = params.id
     a.href = params.href
+    a.onclick = params.onclick
     if (params.targetBlank) a.target = '_blank'
     a.innerHTML = params.innerHTML
     if (params.style) {
