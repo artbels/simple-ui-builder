@@ -73,6 +73,13 @@
       }
     }
 
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        input.setAttribute(attribute, val)
+      }
+    }
+
     params.parent.appendChild(input)
   }
 
@@ -138,9 +145,18 @@
       }
     }
     button.style.margin = button.style.margin || params.margin || '10px'
+
     button.onclick = function () {
       cb(button.id)
     }
+
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        button.setAttribute(attribute, val)
+      }
+    }
+
     params.parent.appendChild(button)
   }
 
@@ -272,6 +288,13 @@
         cb(radio.id)
       }
 
+      if (params.attributes) {
+        for (var attribute in params.attributes) {
+          var val = params.attributes[attribute]
+          radio.setAttribute(attribute, val)
+        }
+      }
+
       params.parent.appendChild(radio)
       params.parent.appendChild(document.createTextNode(item))
       if (params.br) params.parent.appendChild(document.createElement('br'))
@@ -317,6 +340,14 @@
     checkbox.onclick = function () {
       cb(checkbox.id + ' ' + checkbox.checked)
     }
+
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        checkbox.setAttribute(attribute, val)
+      }
+    }
+
     params.parent.appendChild(checkbox)
 
     if (params.text) {
@@ -414,6 +445,13 @@
       }
     }
 
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        fileInput.setAttribute(attribute, val)
+      }
+    }
+
     fileInput.onchange = function (evt) {
       var fileToRead = evt.target.files[0]
       var fileType = fileToRead.name.split(/\./).pop()
@@ -481,6 +519,12 @@
         a.style[key] = val
       }
     }
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        a.setAttribute(attribute, val)
+      }
+    }
     params.parent.appendChild(a)
   }
 
@@ -509,6 +553,12 @@
       for (var key in params.style) {
         var val = params.style[key]
         span.style[key] = val
+      }
+    }
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        span.setAttribute(attribute, val)
       }
     }
     params.parent.appendChild(span)
@@ -542,6 +592,12 @@
         img.style[key] = val
       }
     }
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        img.setAttribute(attribute, val)
+      }
+    }
     params.parent.appendChild(img)
   }
 
@@ -568,15 +624,23 @@
     var a = document.createElement('a')
     a.id = params.id
     a.href = params.href
-    a.onclick = params.onclick
     if (params.targetBlank) a.target = '_blank'
     a.innerHTML = params.innerHTML
+
     if (params.style) {
       for (var key in params.style) {
         var val = params.style[key]
         a.style[key] = val
       }
     }
+
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        a.setAttribute(attribute, val)
+      }
+    }
+
     params.parent.appendChild(a)
   }
 
@@ -677,6 +741,14 @@
 
     textarea.style.fontFamily = 'monospace'
     textarea.style.fontSize = params.fontSize
+
+    if (params.attributes) {
+      for (var attribute in params.attributes) {
+        var val = params.attributes[attribute]
+        textarea.setAttribute(attribute, val)
+      }
+    }
+
     params.parent.appendChild(textarea)
 
     textarea.value = localStorage['textarea#' + params.id] ||
@@ -1090,7 +1162,7 @@
   UI.slug = function (str) {
     if (!str) return
 
-    if(typeof str === 'number') return str
+    if (typeof str === 'number') return str
 
     var letterMap = {
       '/': '_',
