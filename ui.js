@@ -336,6 +336,7 @@
     var checkbox = document.createElement('input')
     checkbox.type = 'checkbox'
     checkbox.id = params.id
+    checkbox.className = params.className
     checkbox.checked = Boolean(params.checked)
     checkbox.onclick = function () {
       cb(checkbox.id + ' ' + checkbox.checked)
