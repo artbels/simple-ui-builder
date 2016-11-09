@@ -196,6 +196,7 @@
       var buttonParams = {
         parent: params.parent,
         innerHTML: item,
+        className: params.className,
         style: {
           margin: '2px'
         }
