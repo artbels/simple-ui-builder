@@ -470,10 +470,12 @@
 
         fileReader.onload = function (e) {
           var contents = e.target.result
-          if (params.json && (['{', '['].indexOf(contents.slice(0, 1)) != -1))
+          if (params.json && (['{', '['].indexOf(contents.slice(0, 1)) != -1)) {
             contents = JSON.parse(contents)
+          }
 
           cb(contents, fileToRead, index, len)
+          readFile(index + 1)
         }
 
         if ((['zip', 'kmz'].indexOf(fileType) != -1) ||
