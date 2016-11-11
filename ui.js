@@ -439,6 +439,7 @@
     params.parent.appendChild(fileInput)
     fileInput.type = 'file'
     fileInput.id = params.id
+    if(params.multiple) fileInput.multiple = "multiple"
 
     if (params.style) {
       for (var key in params.style) {
@@ -449,34 +450,43 @@
 
     if (params.attributes) {
       for (var attribute in params.attributes) {
-        var val = params.attributes[attribute]
-        fileInput.setAttribute(attribute, val)
+        var atrVal = params.attributes[attribute]
+        fileInput.setAttribute(attribute, atrVal)
       }
     }
 
     fileInput.onchange = function (evt) {
-      var fileToRead = evt.target.files[0]
-      var fileType = fileToRead.name.split(/\./).pop()
-
-      if (parent.bypassFileReader) return cb(fileToRead)
+      var files = evt.target.files
+      var len = files.length
       var fileReader = new FileReader()
-      fileReader.onload = function (e) {
-        var contents = e.target.result
-        if (params.json && (['{', '['].indexOf(contents.slice(0, 1)) != -1))
-          contents = JSON.parse(contents)
 
-        cb(contents, fileToRead)
-      }
+      function readFile (index) {
+        if (index >= len) return
 
-      if ((['zip', 'kmz'].indexOf(fileType) != -1) ||
-        (params.readAsArrayBuffer)) {
-        fileReader.readAsArrayBuffer(fileToRead)
-      } else if ((['xls', 'xlsx'].indexOf(fileType) != -1) ||
-        (params.readAsBinaryString)) {
-        fileReader.readAsBinaryString(fileToRead)
-      } else {
-        fileReader.readAsText(fileToRead, params.encoding)
+        var fileToRead = files[index]
+        var fileType = fileToRead.name.split(/\./).pop()
+
+        if (parent.bypassFileReader) return cb(fileToRead)
+
+        fileReader.onload = function (e) {
+          var contents = e.target.result
+          if (params.json && (['{', '['].indexOf(contents.slice(0, 1)) != -1))
+            contents = JSON.parse(contents)
+
+          cb(contents, fileToRead, index, len)
+        }
+
+        if ((['zip', 'kmz'].indexOf(fileType) != -1) ||
+          (params.readAsArrayBuffer)) {
+          fileReader.readAsArrayBuffer(fileToRead)
+        } else if ((['xls', 'xlsx'].indexOf(fileType) != -1) ||
+          (params.readAsBinaryString)) {
+          fileReader.readAsBinaryString(fileToRead)
+        } else {
+          fileReader.readAsText(fileToRead, params.encoding)
+        }
       }
+      readFile(0)
     }
   }
 
@@ -938,7 +948,7 @@
     if (arr.length !== 0) {
       for (var n = 0; n < arr.length; n++) { // собираем данные полей, чистим
         var dRow = tbody.insertRow(-1)
-        dRow.id = "r"+n
+        dRow.id = 'r' + n
         var oneObj = arr[n]
         if (params.selectable) {
           var tdch = document.createElement('td')
@@ -947,7 +957,7 @@
 
           var chBoxRow = document.createElement('input')
           chBoxRow.className = params.tableId + 'RowCheckbox'
-          chBoxRow.id = "r"+n
+          chBoxRow.id = 'r' + n
           chBoxRow.type = 'checkbox'
           chBoxRow.checked = Boolean(params.checked)
           tdch.appendChild(chBoxRow)
