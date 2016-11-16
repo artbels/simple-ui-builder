@@ -380,12 +380,12 @@
       }
     }
 
+    params = params || {}
+
     if (typeof params.parent == 'string') {
       params.parent = document.querySelector(params.parent)
     } else params.parent = params.parent ||
       document.querySelector('#ui') || document.body
-
-    params = params || {}
 
     cb = cb || function (id) {
       console.log(id + ' checked')
