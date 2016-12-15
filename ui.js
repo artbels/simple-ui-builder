@@ -796,8 +796,6 @@
     params.className = ''
     UI.textarea(params)
 
-    params.parent.appendChild(document.createElement('br'))
-
     var textareaId = params.id
     var textareaNode = document.querySelector('textarea#' + params.id)
 
@@ -808,7 +806,8 @@
       actionParams.innerHTML = params.buttonText || 'Action'
       actionParams.className = ''
       actionParams.style = {
-        margin: '0px'
+        margin: '0px',
+        marginTop: '10px',
       }
 
       UI.button(actionParams, function () {
@@ -828,7 +827,8 @@
     clearParams.className = ''
     clearParams.style = {
       margin: '0px',
-      marginLeft: '5px'
+      marginLeft: '5px',
+      marginTop: '10px',
     }
 
     UI.button(clearParams, function () {
