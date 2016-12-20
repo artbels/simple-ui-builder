@@ -923,7 +923,7 @@
 
         thh.style.background = '#f6f6f6'
         thh.style.padding = '3px'
-        thh.style.border = '1px solid black'
+        thh.style.border = '1px solid #CCC'
 
         chBoxCol = document.createElement('input')
         chBoxCol.id = params.tableId + 'ColCheckbox'
@@ -938,7 +938,7 @@
         var th = document.createElement('th')
         th.style.background = '#f6f6f6'
         th.style.padding = '3px'
-        th.style.border = '1px solid black'
+        th.style.border = '1px solid #CCC'
 
         th.appendChild(document.createTextNode(columns[h]))
         hRow.appendChild(th)
@@ -956,7 +956,7 @@
         if (params.selectable) {
           var tdch = document.createElement('td')
           tdch.style.padding = '3px'
-          tdch.style.border = '1px solid black'
+          tdch.style.border = '1px solid #CCC'
 
           var chBoxRow = document.createElement('input')
           chBoxRow.className = params.tableId + 'RowCheckbox'
@@ -997,7 +997,7 @@
           }
 
           td.style.padding = '3px'
-          td.style.border = '1px solid black'
+          td.style.border = '1px solid #CCC'
 
           dRow.appendChild(td)
         }
