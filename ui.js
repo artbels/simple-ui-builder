@@ -619,7 +619,7 @@
   UI.link = function (params) {
     if (typeof params == 'string') params = {
         href: params,
-        title: params
+        innerHTML: params
     }
 
     if (!params.href) return 'no href'
@@ -766,8 +766,7 @@
 
     params.parent.appendChild(textarea)
 
-    textarea.value = localStorage['textarea#' + params.id] ||
-      params.value || ''
+    textarea.value = params.value || localStorage['textarea#' + params.id] || ''
 
     textarea.onkeyup = saveContents
     textarea.onchange = saveContents
