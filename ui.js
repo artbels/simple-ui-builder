@@ -649,6 +649,8 @@
       }
     }
 
+    input.className = params.class || params.className
+
     if (params.attributes) {
       for (var attribute in params.attributes) {
         var val = params.attributes[attribute]
