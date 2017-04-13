@@ -75,8 +75,8 @@
 
     if (params.attributes) {
       for (var attribute in params.attributes) {
-        var val = params.attributes[attribute]
-        input.setAttribute(attribute, val)
+        var atr = params.attributes[attribute]
+        input.setAttribute(attribute, atr)
       }
     }
 
@@ -649,12 +649,12 @@
       }
     }
 
-    input.className = params.class || params.className
+    a.className = params.class || params.className
 
     if (params.attributes) {
       for (var attribute in params.attributes) {
-        var val = params.attributes[attribute]
-        a.setAttribute(attribute, val)
+        var atr = params.attributes[attribute]
+        a.setAttribute(attribute, atr)
       }
     }
 
