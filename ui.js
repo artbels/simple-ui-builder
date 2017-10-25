@@ -1119,10 +1119,15 @@
     div.id = params.id || 'div'
     div.className = params.className
 
+    if (params.style) {
+      for (var key in params.style) {
+        div.style[key] = params.style[key]
+      }
+    }
+
     if (params.attributes) {
       for (var attribute in params.attributes) {
-        var val = params.attributes[attribute]
-        div.setAttribute(attribute, val)
+        div.setAttribute(attribute, params.attributes[attribute])
       }
     }
 
